@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure Practical</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        pre {
+            background-color: #eef;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Structure Practical</h1>
+        <h2>bubble sort</h2>
+        <pre><code>
+s=[64,34,25,12,4,90,5,30]
+n=len(s)
+for i in range(n-1):
+    for j in range(n-i-1):
+       if s[j]>s[j+1]:
+          s[j],s[j+1]=s[j+1],s[j]
+print("sorted array:",s)
+<h2><header>selection sort</header></h2>
+def selectionsort(theseq):
+    n = len(theseq)
+    for i in range(n - 1):
+        min = theseq[i]
+        flag = False
+        for j in range(i + 1, n):
+            if theseq[j] < min:
+                min = theseq[j]
+                pos = j
+                flag = True
+        if flag:
+            tmp = theseq[i]
+            theseq[i] = theseq[pos]
+            theseq[pos] = tmp
+    return theseq
+
+arr = [10, 30, 20, 5, 9]
+selectionsort(arr)
+print(selectionsort(arr))
+<h2><header>insertion sort</header></h2>
+def insertionsort(A):
+    n = len(A)
+    for i in range(1, n):
+        Temp = A[i]
+        k = i - 1
+        while k >= 0 and A[k] > Temp:  
+            A[k + 1] = A[k]
+            k = k - 1
+        A[k + 1] = Temp
+
+    return A
+
+arr = [8, 100, 30, 2, 9]
+print(insertionsort(arr))
+<h2><header>merge sort</header></h2>
+def mergesort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        sub_array1 = arr[:mid]
+        sub_array2 = arr[mid:]
+
+        mergesort(sub_array1)
+        mergesort(sub_array2)
+
+        i = j = k = 0
+        while i < len(sub_array1) and j < len(sub_array2):
+            if sub_array1[i] < sub_array2[j]:
+                arr[k] = sub_array1[i]
+                i += 1
+            else:
+                arr[k] = sub_array2[j]
+                j += 1
+            k += 1
+        while i < len(sub_array1):
+            arr[k] = sub_array1[i]
+            i += 1
+            k += 1
+
+        while j < len(sub_array2):
+            arr[k] = sub_array2[j]
+            j += 1
+            k += 1
+
+arr = [10, 9, 2, 4, 6, 13]
+mergesort(arr)
+print(arr)
+<h2><header>1B]Program to search the element using sequential search and binary search</header></h2>
+global s
+global n
+s = [12, 16, 20, 40, 50, 70, 0, 0, 0, 0, 0]
+data = 26
+n = 6
+
+def linearsearch():
+    print(s)
+    for i in range(n):
+        if (s[i] == data):
+            print("element found at position:" + str(i + 1))
+            break
+
+def insert(element):
+    global s
+    global n
+    print("before inserting")
+    print(s)
+    s[6] = element
+    print("after inserting")
+    print(s)
+    print(n + 1)
+    n = n + 1
+
+def insertatk(element, k):
+    global s
+    global n
+    print("before inserting")
+    print(s)
+    for i in range(n, k - 1, -1):
+        s[i + 1] = s[i]
+    s[k] = element
+    n = n + 1
+    print("after inserting")
+    print(s)
+    print(n)
+
+def binarysearch():
+    s = [10, 20, 30, 40, 50, 60]
+    lb = 0
+    ub = 5
+    data = 40
+    start = lb
+    end = ub
+    while start <= end:
+        middle = int((start + end) / 2)
+        if s[middle] == data:
+            print("element is found at position", middle)
+            return
+        if s[middle] < data:
+            start = middle + 1
+        else:
+            end = middle - 1
+    print("element does not exist in the array")
+print("\nmain menu")
+print("1.insert new element")
+print("2.insert new element at kth position")
+print("3.linear search")
+print("4.binary search")
+print("5.bubble sort")
+choice=int(input("enetr the choice"))
+while True:
+    if choice==1:
+        insert(30)
+        break
+    if choice==2:
+        insertatk(data,3)
+        break
+    elif choice==3:
+        linearsearch()
+        break
+    elif choice==4:
+        binarysearch()
+        break
+    elif choice==5:
+         bubblesort()
+         break
+
+
+<h2><header>2A]Program to create a Single Linked List and Display the node element in the Reverse order-:</header></h2>
+#program to create a single linked list and
+#display the node element in the reverse order
+class node:
+    def __init__(self,data,nextnode=None):
+        self.data=data
+        self.nextnode=nextnode
+
+    def getdata(self):
+        return self.data
+    def setdata(self,val):
+        return self.nextnode
+    def getnextnode(self):
+        return self.nextnode
+    def setnextnode(self,val):
+        self.nextnode=val
+
+class LinkedList:
+    def __init__(self,pointer=None,begin=None):
+        self.begin=begin
+        self.pointer=pointer
+        self.size=0
+
+    def getsize(self):
+        return self.size
+    def addnodeAtBegin(self,data):
+        head=self.begin
+        newnode=node(data,None)
+        newnode.next=self.begin
+        self.begin=newnode
+        self.size+=1
+        return True
+    def addnodeAtEnd(self,data):
+        newnode=node(data,None)
+        self.pointer=self.begin
+        while self.pointer.nextnode:
+            self.pointer=self.pointer.nextnode
+        self.pointer.nextnode=newnode
+        self.size+=1
+        return True
+    def addnodeAtparticular(self,datN,item):
+        newnode=node(datN,None)
+        self.pointer=self.begin
+        while self.pointer!=None and self.pointer.data!=item:
+            self.pointer=self.pointer.nextnode
+        newnode.nextnode=self.pointer.nextnode
+        self.pointer.nextnode=newnode
+        self.pointer.nextnode=newnode
+        self.size+=1
+        return True
+
+    def printnode(self):
+        curr=self.begin
+        while curr:
+            print(curr.data)
+            curr=curr.getnextnode()
+myList=LinkedList()
+i=0
+while 1:
+    i=int(input('enter 1/2/3 to insert at begin/end/between:'))
+    if i==1:
+       myList.addnodeAtBegin(5)
+    elif i==2:
+       myList.addnodeAtEnd(10)
+    elif i==3:
+        myList.addnodeAtparticular(9,5)
+    elif i==4:
+        break
+
+print("printing")
+myList.printnode()
+print(myList.size)
+<h2><header>2B]Write a program to create a doubly linked list and perform the search operation on it.-:</header></h2>
+#Write a program to create a doubly linked list and perform the search operation
+on it.
+#A linked list node
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+        self.prev=None
+
+class Doublylinkedlist:
+    def __init__(self):
+        self.begin=None
+
+    def insertatbegin(self,new_data):
+        new_node=Node(new_data)
+        new_node.next=self.begin
+
+        if self.begin is not None:
+            self.begin.prev=new_node
+
+        self.begin=new_node
+
+    def insertafter(self,key,new_data):
+        if self.begin==None:
+            print("The given list is empty")
+            return
+        Pointer=self.begin
+        while Pointer.next!= None and Pointer.data==key:
+            Pointer=Pointer.next
+        
+        if Pointer.next==None and Pointer.data==key:
+            print('Key cannot be inserted')
+            return
+        new_node=Node(new_data)
+
+        if Pointer.next!=None:
+            Successor=Pointer.next
+            new_node.next=Successor
+            Pointer.next=new_node
+            new_node.prev=Pointer
+            Successor.prev=new_node
+
+        else:
+            new_node.next=None
+            new_node.prev=Pointer
+            Pointer.next=new_node
+            End=new_node
+        return
+
+    
+    def append(self,new_data):
+
+        new_node=Node(new_data)
+
+        new_node.next=None
+
+        if self.begin is None:
+            new_node.prev=None
+            self.begin=new_node
+            return
+        last=self.begin
+        while(last.next is not None):
+            last=last.next
+        last.next=new_node
+
+        new_node.prev=last
+        return
+
+    #This function prints contents of linked list starting from the given node
+    def printlist(self,node):
+        print("\nTraversal in forward direction")
+        while(node is not None):
+            print(" % d" %(node.data))
+            node=node.next
+
+DLL=Doublylinkedlist()
+
+i=0
+while 1:
+    i=int(input("Enter 1/2/3 to insert at begin/end/between:"))
+    if i==1:
+        DLL.insertatbegin(5)
+    elif i==2:
+        DLL.append(10)
+    elif i==3:
+        DLL.insertafter(5,9)
+    elif i==4:
+        DLL.printlist(DLL.begin)
+<h2><header> 3A]Write a program to implement the concept of Stack with Push, Pop, Display and Exit operations</header></h2>
+ class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+class stack:
+    def __init__(self):
+        self.head=None
+
+    def push(self,data):
+        if self.head is None:
+            self.head=Node(data)
+        else:
+            new_node=Node(data)
+            new_node.next=self.head
+            self.head=new_node
+    def pop(self):
+        if self.head is None:
+            return None
+        else:
+            popped=self.head.data
+            self.head=self.head.next
+            return popped
+
+a_stack=stack()
+while True:
+     print('push <value>')
+     print('pop')
+     print('quit')
+     do=input('what would you like to do?').split()
+     
+     operation=do[0].strip().lower()
+     if operation == 'push':
+         a_stack.push(int(do[1]))
+     elif operation == 'pop':
+         popped=a_stack.pop()
+         if popped is None:
+             print('stack is empty')
+         else:
+             print('Popped Value:',int(popped))
+     elif operation=='quit':
+        break
+
+<h2><header>3B1]#python program to convert infix expression to postfix expression</header></h2>
+#class to convert the expression
+class conversion:
+    #constructor to initialize the class variables
+    def __init__(self,capacity):
+        self.top=-1
+        self.capacity=capacity
+        #this array is used a stack
+        self.array=[]
+        #precendence setting
+        self.output=[]
+        self.precedence={'+':1,'-':1,'*':2,'/':2,'^':3}
+        #check if the stack is empty
+    def isEmpty(self):
+            return True if self.top==-1 else False
+        #return the value of the top of the stack
+    def peek(self):
+            return self.array[-1]
+        #pop the element from the stack
+    def pop(self):
+        if not self.isEmpty():
+            self.top-=1
+            return self.array.pop()
+        else:
+            return"$"
+        #push the element to the stack
+    def push(self,op):
+        self.top+=1
+        self.array.append(op)
+
+        #A utility function to check is the given character
+             #is operand
+    def isoperand(self,ch):
+        return ch.isalpha()
+        #check if the precedence of operator is strictly
+        #less than top of stack or not
+    def notGreater(self,i):
+        try:
+            a=self.precedence[i]
+            b=self.precedence[self.peek()]
+            return True if a<=b else False
+        except KeyError:
+            return False
+
+        #the main function that
+        #converts given infix expression
+        #to postfix expression
+    def infixToPostfix(self,exp):
+            #iterate over the expression for conversion
+        for i in exp:
+                #if the character is an operand,
+                #add it to output:
+            if self.isoperand(i):
+                    self.output.append(i)
+                #if the character is an '(",push it to stack
+            elif i=='(':
+                self.push(i)
+                #if the scanned character is an')',pop and
+                    #output from the stack until and'('is found
+            elif i==')':
+                while((not self.isEmpty())and self.peek()!='('):
+                    a=self.pop()
+                    self.output.append(a)
+                if(not self.isEmpty()and
+                       self.peek()!='('):
+                        return-1
+                else:
+                    self.pop()
+                 #an operator is encountered
+            else:
+                 while(not self.isEmpty()and self.notGreater(i)):
+                     self.output.append(self.pop())
+                 self.push(i)
+                #pop all the operator from the stack
+        while not self.isEmpty():
+            self.output.append(self.pop())
+            return"".join(self.output)
+#Driver program to test above function
+exp="a*b+(c*d-e)^(f/g*h)-i"
+obj=conversion(len(exp))
+print(obj.infixToPostfix(exp))
+
+
+
+<h2><header>3B2]write a program to convert infix to prefix </header></h2>
+
+class infix_to_prefix:
+    precedence={'^':5,'*':4,'/':4,'+':3,'-':3,'(':2,')':1}
+    def __init__(self):
+        self.items=[]
+        self.size=-1
+    def push(self,value):
+        self.items.append(value)
+        self.size+=1
+    def pop(self):
+        if self.isempty():
+            return 0
+        else:
+            self.size-=1
+            return self.items.pop()
+    def isempty(self):
+        if(self.size==-1):
+            return True
+        else:
+            return False
+    def seek(self):
+        if self.isempty():
+            return False
+        else:
+            return self.items[self.size]
+    def isOperand(self,i):
+        if i.isalpha() or i in '1234567890':
+            return True
+        else:
+            return False
+    def reverse(self,expr):
+        rev=""
+        for i in expr:
+            if i=='(':
+                i=')'
+            elif i==')':
+                i=='('
+            rev=i+rev
+        return rev
+    def infixtoprefix(self,expr):
+        prefix=""
+        print('prefix expression after every iteration is:')
+        for i in expr:
+            if(len(expr)%2==0):
+                print("Incorrect infix expr")
+                return False
+            elif(self.isOperand(i)):
+                prefix+=i
+            elif(i in '+-*/^'):
+                while(len(self.items)and
+                self.precedence[i]<self.precedence[self.seek()]):
+                    prefix+=self.pop()
+                self.push(i)
+            elif i=='(':
+                self.push(i)
+            elif i==')':
+                o=self.pop()
+                while o!='(' and o!=0:
+                    prefix+=o
+                    o=self.pop()
+            print(prefix)
+                 #end of for
+        while len(self.items):
+            if(self.seek()=='('):
+                self.pop()
+            else:
+                prefix+=self.pop()
+                print(prefix)
+            return prefix
+s=infix_to_prefix()
+#expr=input('enter the expression')
+expr="a*b+(c*d-e)^(f/g*h)-i"
+rev=""
+rev=s.reverse(expr)
+#print(rev) 
+result=s.infixtoprefix(rev)
+if (result!=False):
+    prefix=s.reverse(result)
+    print("the prefix expr of :",expr,"is",prefix)
+
+<h2><header>4A]write a program to implement concept of queue</header></h2>
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+
+class Queue:
+    def __init__(self):
+        self.head=None
+        self.last=None
+
+    def enqueue(self,data):
+        if self.last is None:
+            self.head=Node(data)
+            self.last=self.head
+        else:
+            self.last.next=Node(data)
+            self.last=self.last.next
+
+    def dequeue(self):
+        if self.head is None:
+            return None
+        else:
+            to_return=self.head.data
+            self.head=self.head.next
+            return to_return
+
+a_queue=Queue()
+while True:
+    print('enqueue<value>')
+    print('dequeue')
+    print('quit')
+    do=input('What would you like to do?').split()
+
+    operation=do[0].strip().lower()
+    if operation=='enqueue':
+        a_queue.enqueue(int(do[1]))
+    elif operation=='dequeue':
+        dequeued=a_queue.dequeue()
+        if dequeued is None:
+            print('Queue is empty.')
+        else:
+            print('Dequeued element:',int (dequeued))
+    elif operation=='quit':
+        break
+
+
+
+4B]write a program to implement circular queue
+class CircularQueue:
+    #Constructor
+    def __init__(self):
+        self.queue=list()
+        self.head=0
+        self.tail=0
+        self.maxSize=8
+
+    #Adding elements to the queue
+    def enqueue(self,data):
+        if self.size()==self.maxSize-1:
+            return ("Queue Full!")
+        self.queue.append(data)
+        self.tail=(self.tail + 1) % self.maxSize
+        return True
+
+    #Removing elements from the queue
+    def dequeue(self):
+        if self.size()==0:
+            print ("Queue Empty!")
+            return None
+        data=self.queue[self.head]
+        self.head=(self.head + 1) % self.maxSize
+        return data
+
+    #Calculating the size of the queue
+    def size(self):
+        if self.tail>=self.head:
+            return (self.tail-self.head)
+        return (self.maxSize - (self.head-self.tail))
+
+q=CircularQueue()
+while True:
+    print('enqueue <value>')
+    print('dequeue')
+    print('quit')
+    do = input('What would you like to do? ').split()
+
+    operation =do[0].strip().lower()
+    if operation == 'enqueue':
+        q.enqueue(int(do[1]))
+    elif operation == 'dequeue':
+        dequeued = q.dequeue()
+        if dequeued is None:
+            print('Queue is Empty .')
+        else:
+            print('Dequeued element :',int(dequeued))
+    elif operation == 'quit' 
+       break
+<h2><header>5A]write a program to create a tree and display the elements</header></h2>
+
+#search_Btree
+class Node:
+
+    def __init__(self , data):
+        self.left = None
+        self.right = None
+        self.data = data
+
+#insert method to create nodes
+    def insert(self,data):
+
+        if self.data:
+            if data < self.data:
+                if self.left is None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data > self.data:
+                if self.right is None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+
+            else:
+                self.data = data
+
+#findval method to compare the value with nodes
+    def findval(self, lkpval):
+        if lkpval < self.data:
+            if self.left is None:
+                return str(lkpval)+" Not Found"
+            return self.left.findval(lkpval)
+        elif lkpval > self.data:
+            if self.right is None:
+                return str(lkpval)+" Not found"
+            return self.right.findval(lkpval)
+        else:
+            print(str(self.data) + ' is found')
+
+#Print the tree
+    def PrintTree(self):
+        if self.left:
+            self.left.PrintTree()
+        print( self.data)
+        if self.right:
+            self.right.PrintTree()
+
+root = Node(12)
+root.insert(6)
+root.insert(14)
+root.insert(3)
+print(root.findval(7))
+print(root.findval(14))
+
+<h2><header>5B]write a program for inorder, postorder ,and preorder of tree</header></h2>
+#search_Btree
+class Node:
+
+    def __init__(self , data):
+        self.left = None
+        self.right = None
+        self.data = data
+
+#insert method to create nodes
+    def insert(self,data):
+
+        if self.data:
+            if data < self.data:
+                if self.left is None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data > self.data:
+                if self.right is None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+
+            else:
+                self.data = data
+
+#findval method to compare the value with nodes
+    def findval(self, lkpval):
+        if lkpval < self.data:
+            if self.left is None:
+                return str(lkpval)+" Not Found"
+            return self.left.findval(lkpval)
+        elif lkpval > self.data:
+            if self.right is None:
+                return str(lkpval)+" Not found"
+            return self.right.findval(lkpval)
+        else:
+            print(str(self.data) + ' is found')
+
+#Print the tree
+    def PrintTree(self):
+        if self.left:
+            self.left.PrintTree()
+        print( self.data)
+        if self.right:
+            self.right.PrintTree()
+
+#Preorder traversal
+#Root -->Left -->Right
+    def PreorderTraversal(self, root):
+        res = []
+        if root:
+            res.append(root.data)
+            res = res + self.PreorderTraversal(root.left)
+            res = res + self.PreorderTraversal(root.right)
+        return res
+    
+#Postorder traversal
+#Left -->Right -->Root    
+    def PostorderTraversal(self, root):
+        res = []
+        if root:
+            res = res + self.PreorderTraversal(root.left)
+            res = res + self.PreorderTraversal(root.right)
+            res.append(root.data)
+        return res
+
+#Inorder traversal
+#Left -->Root-->Right 
+    def InorderTraversal(self, root):
+        res = []
+        if root:
+            res = res + self.PreorderTraversal(root.left)
+            res.append(root.data)
+            res = res + self.PreorderTraversal(root.right)
+           
+        return res
+    
+    
+root = Node(27)
+root.insert(14)
+root.insert(35)
+root.insert(19)
+root.insert(31)
+root.insert(42)
+print("Preorder ")
+print(root.PreorderTraversal(root))
+print("Postorder ")
+print(root.PostorderTraversal(root))
+print("Inorder ")
+print(root.InorderTraversal(root))
+
+<h2><header>6A]write a program to implement warshall’s algorithm</hedaer></h2>
+A=[0,0,1,0,0],[0,0,0,1,0],[0,1,0,0,1],[0,1,0,0,0],[1,0,0,0,0]
+p=[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]
+
+print (len(p))
+for i in range(0,5):
+    for j in range(0,5):
+        p[i][j]=A[i][j]
+print (p)
+print("\n")
+for k in range(0,5):
+    for i in range(0,5):
+        for j in range(0,5):
+            p[i][j]=p[i][j] or (p[i][k]and p[k][j])
+
+for i in range(0,5):
+    for j in range(0,5):
+        print(p[i][j],end="")
+    print("\n")
+<h2><header>6B]write a program for generating spanning tree using kruskal’s algorithm</header></h2>
+#Kruskal's Algorithm
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = []
+
+    def add_edge(self, u, v, w):
+        self.graph.append([u, v, w])
+
+    def find(self, parent, i):
+        if parent[i] == i:
+            return i
+        return self.find(parent, parent[i])
+
+    def apply_union(self, parent, rank, x, y):
+        xroot = self.find(parent, x)
+        yroot = self.find(parent, y)
+        if rank[xroot] < rank[yroot]:
+            parent[xroot] = yroot
+        elif rank[xroot] > rank[yroot]:
+            parent[yroot] = xroot
+        else:
+            parent[yroot] = xroot
+            rank[xroot] += 1
+
+    def kruskal_algo(self):
+        result = []
+        i, e = 0, 0
+        self.graph = sorted(self.graph, key=lambda item: item[2])
+        parent = []
+        rank = []
+        for node in range(self.V):
+            parent.append(node)
+            rank.append(0)
+        while e < self.V - 1:
+            u, v, w = self.graph[i]
+            i = i + 1
+            x = self.find(parent, u)
+            y = self.find(parent, v)
+            if x != y:
+                e = e + 1
+                result.append([u, v, w])
+                self.apply_union(parent, rank, x, y)
+        for u, v, weight in result:
+            print("%d-%d:%d" % (u, v, weight))
+
+g = Graph(6)
+g.add_edge(0, 1, 4)
+g.add_edge(0, 2, 4)
+g.add_edge(1, 2, 2)
+g.add_edge(2, 3, 3)
+g.add_edge(2, 5, 2)
+g.add_edge(2, 4, 4)
+g.add_edge(3, 4, 3)
+g.add_edge(5, 4, 3)
+g.kruskal_algo()
+        </code></pre>
+            </div>
+</body>
+</html>
